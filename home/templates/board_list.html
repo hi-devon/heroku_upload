@@ -1,0 +1,24 @@
+{% extends "base/main_base.html" %}
+<meta charset="utf-8">
+{% block content %}
+<main role="main" class="inner cover">
+<table id="tblBoard" datatable class="table table-sm table-hover table-bordered">
+<thead class="thead-light">
+	<th></th>
+	<th class="align-middle">No.</th>
+	<th class="align-middle">등록일자</th>
+	<th class="align-middle">제목</th>
+</thead>
+<tbody>
+	{% for row in boardList %}
+	<tr>
+		<td>{{row.id}}</td>
+		<td>{{row.num}}</td>
+		<td>{{row.reg_date|date:'Y-m-d'}}</td>
+		<td>{{row.title}}</td>
+	</tr>
+	{% endfor %}
+</tbody>
+</table>
+</main>
+{% endblock %}

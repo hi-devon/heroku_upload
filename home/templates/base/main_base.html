@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+<meta charset="utf-8">
+{% block base %}
+
+<script>
+$(document).ready(function() {
+	mnuPos = getParameterByName('menu');
+	if(mnuPos) {
+		mnuNo = parseInt(mnuPos);
+		$('.nav .nav-link').eq(mnuNo).addClass('active');
+	}
+	else 
+		$('.nav .nav-link').first().addClass('active');
+});
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+</script>
+<body>
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+	<header class="masthead mb-auto">
+    <div class="inner">
+    	<h3 class="masthead-brand">주식회사 데브온</h3>
+    	<nav class="nav nav-masthead justify-content-center">
+	        <a class="nav-link" href="/">Home</a>
+	        <a class="nav-link" href="board-list?menu=1">공지사항</a>
+	        <a class="nav-link" href="#">Contact</a>
+    	</nav>
+  	</div>
+  	</header>
+	{% block content %}
+	{% endblock %}
+	<footer class="mastfoot mt-auto">
+	    <div class="inner">
+	    	<p>우) 444-444 경기도 용인시 용인구 용인동 444번지 &nbsp;&nbsp;TEL: 444-4444 | FAX: 0504-423-8963 | enigma0303@naver.com<br>Copyright 2019. (주)데브온. All rights reserved.</p>
+	    </div>
+	</footer>
+	</div>	
+</body>
+{% endblock %}
