@@ -17,22 +17,20 @@ th {
 <br>
 <table id="tblBoard" border="1">
 <thead class="thead-light">
-	<th>ID</th>
 	<th class="align-middle">No.</th>
 	<th class="align-middle">구분</th>
 	<th class="align-middle">등록일자</th>
 	<th class="align-middle">제목</th>
 </thead>
 <tbody>
-	{% for row in boardList %}
+
 	<tr>
-		<td>{{row.id}}</td>
-		<td>{{row.num}}</td>
-		<td>{{row.gubun}}</td>
-		<td>{{row.reg_date|date:'Y-m-d'}}</td>
-		<td>{{row.title}}</td>
+		<td>1</td>
+		<td>공지</td>
+		<td>2019-06-24</td>
+		<td>주식회사 데브온 홈페이지가 새로이 오픈되었습니다.</td>
 	</tr>
-	{% endfor %}
+
 </tbody>
 </table>
 </main>
