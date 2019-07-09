@@ -1,11 +1,25 @@
 {% extends "base/main_base.html" %}
 <meta charset="utf-8">
 {% block content %}
+<style>
+table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	border: 1px silver;
+}
+th {
+	background: gray;
+}
+</style>
 <main role="main" class="inner cover">
-<table id="tblBoard" datatable class="table table-sm table-hover table-bordered">
+<h3 align="center">[공지 및 공고사항]</h3>
+<br>
+<table id="tblBoard" border="1">
 <thead class="thead-light">
-	<th></th>
+	<th>ID</th>
 	<th class="align-middle">No.</th>
+	<th class="align-middle">구분</th>
 	<th class="align-middle">등록일자</th>
 	<th class="align-middle">제목</th>
 </thead>
@@ -14,6 +28,7 @@
 	<tr>
 		<td>{{row.id}}</td>
 		<td>{{row.num}}</td>
+		<td>{{row.gubun}}</td>
 		<td>{{row.reg_date|date:'Y-m-d'}}</td>
 		<td>{{row.title}}</td>
 	</tr>
