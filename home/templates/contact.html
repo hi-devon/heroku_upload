@@ -1,0 +1,56 @@
+{% extends "base/main_base.html" %}
+<meta charset="utf-8">
+{% block content %}
+<style>
+table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	border: 1px silver;
+}
+th {
+	background: gray;
+}
+table input,table textarea {
+	width: 100%;
+}
+</style>
+
+<main role="main" class="inner cover">
+<form id="frmContact" method="post">
+{% csrf_token %}
+<h3 align="center">[문의 및 의뢰]</h3>
+<br>
+<table id="tblContact" >
+<tr>
+	<td>이름</td>
+</tr>
+<tr>
+	<td><input type="text" name="customer_name"></td>
+</tr>
+<tr>
+	<td>e-mail</td>
+</tr>
+<tr>
+	<td><input type="text" name="email"></td>
+</tr>
+<tr>
+	<td>제목</td>
+</tr>
+<tr>
+	<td><input type="text" name="title"></td>
+</tr>
+<tr>
+	<td>내용</td>
+</tr>
+<tr>
+	<td><textarea rows="10" name="content"></textarea></td>
+</tr>
+</table>
+<br>
+<div align="middle">
+	<input type="submit" value="보내기">
+</div>
+</form>
+</main>
+{% endblock %}
