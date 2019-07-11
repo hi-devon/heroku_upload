@@ -22,4 +22,8 @@ urlpatterns = [
     path('', views.home),
     path('board-list', views.board_list),
     path('contact', views.contact),
+    path('board-detail', views.board_detail),
+    path('password-check', views.password_check),
+    path('register-board', views.register_board),
+    path('auth-check', views.auth_check),
 ]

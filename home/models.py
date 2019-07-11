@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 # Create your models here.
 class Board(models.Model):
@@ -14,3 +15,7 @@ class Contact(models.Model):
     title = models.CharField(null=True, max_length=50)
     content = models.TextField(null=True)
     reg_date = models.DateField(null=True)
+    
+class SettingsInfo(models.Model):
+    itemkey = models.CharField(max_length=30)
+    itemval = models.CharField(max_length=128)

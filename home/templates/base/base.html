@@ -12,7 +12,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/humanity/jquery-ui.css"/>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -155,11 +157,26 @@ th {
 }
 .tdhead {
 	background: #DDD;
-}	
+}
+input:read-only, .readonly {
+	background: whitesmoke;
+	color: #778899;
+}
+
 	</style>
 
 	<title>데브온</title>
-
+<script>
+function page_back_reload() {
+	if(opener==null) {
+		window.location = document.referrer;
+	}
+	else if(document.referrer!=opener.document.location) { //이전 페이지가 부모페이지가 아닌 경우
+		window.location = document.referrer; //이전 페이지를 다시 로드
+	}
+	else self.close(); //이전 페이지가 부모페이지면 자식창을 닫음
+}
+</script>
 </head>
 
 	{% block base %}

@@ -11,28 +11,93 @@ table {
 th {
 	background: gray;
 }
+td {
+	padding: 8px;
+	text-align: center;
+	vertical-align: middle;	
+}
+.ui-widget, .ui-widget button {
+	font-size: 0.85em;
+}
+.ui-dialog-titlebar-close{
+    display: none;
+}
 </style>
-
+<script>
+$(document).ready(function() {
+	$("#pass-dialog").dialog({
+		modal: true,
+		autoOpen: false,
+	});
+});
+function register_confirm() {
+	$("#InpPass").val("");
+	$("#pass-dialog").dialog({
+		modal: true,
+		buttons: [
+			{
+				text: "확인",
+				class: "btn btn-secondary btn-sm",
+				click: PasswordCheck
+			},
+			{
+				text: "취소",
+				class: "btn btn-secondary btn-sm",
+				click: function() {
+					$(this).dialog("close");
+				}
+			}
+		]
+	});
+	$("#pass-dialog").dialog("open");
+}
+function PasswordCheck() {
+	$.ajax({
+		url: "password-check",
+		type: "POST",
+		data: {"pwd": $("#InpPass").val()},
+		success: function(data) {
+			if(data.is_authenticated == "ok") {
+				location.href = "register-board";
+			}
+		}
+	});
+	$("#pass-dialog").dialog("close");
+}
+</script>
 <main role="main" class="inner cover">
 <h3 align="center">[공지 및 공고사항]</h3>
 <br>
-<table id="tblBoard" datatable border="1">
-<thead class="thead-light">
+<table id="tblBoard" datatable border="0">
+
+<thead align="middle">
 	<th class="align-middle">No.</th>
 	<th class="align-middle">구분</th>
 	<th class="align-middle">등록일자</th>
 	<th class="align-middle">제목</th>
 </thead>
-<tbody>
-	{% for row in boardList %}
-	<tr>
-		<td>{{row.num}}</td>
-		<td>{{row.gubun}}</td>
-		<td>{{row.reg_date|date:'Y-m-d'}}</td>
-		<td>{{row.title}}</td>
-	</tr>
-	{% endfor %}
+{% for row in boardList %}
+<tr>
+	<td>{{row.num}}</td>
+	<td>{{row.gubun}}</td>
+	<td>{{row.reg_date|date:'Y-m-d'}}</td>
+	<td><a href="board-detail?id={{row.id}}">{{row.title}}</a></td>
+</tr>
+{% endfor %}
+<tr>
+	<td colspan="4" style="text-align:right;padding-right:20px;padding-top:20px;">
+		<a href="javascript:register_confirm();">등록</a>
+	</td>
+</tr>
 </tbody>
 </table>
 </main>
+
+<div id="pass-dialog" title="암호확인" style="display:none;">
+	<form>
+		<label for="name">암호</label>
+		<input type="password" id="InpPass" class="text ui-widget-content ui-corner-all">
+	</form>	
+</div>
+
 {% endblock %}

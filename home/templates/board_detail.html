@@ -1,0 +1,76 @@
+{% extends "base/main_base.html" %}
+<meta charset="utf-8">
+{% block content %}
+<style>
+table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	border: 1px silver;
+}
+th {
+	background: gray;
+}
+table input,table textarea {
+	width: 100%;
+}
+</style>
+<script>
+$(document).ready(function() {
+	$.ajax({
+		'url': 'auth-check',
+		'success': function(data) {
+			if (data.is_authenticated) {
+				$("#btnDelete").show();
+			} else {
+				$("#btnDelete").hide();
+			}
+		}
+	});
+});
+function delete_board() {
+	$.ajax({
+		url: 'board-detail',
+		type: 'POST',
+		data: {'board_id': $("input[name=board_id]").val() },
+		success: function(data) {
+			page_back_reload();
+		}
+	});
+}
+</script>	
+<main role="main" class="inner cover">
+<form id="frmContact" method="post">
+{% csrf_token %}
+<h3 align="center">[공지내용]</h3>
+<br>
+<table id="tblBoardDetail">
+<tr>
+	<td>제목</td>
+	<td>{{board.title}}</td>
+</tr>
+<tr>
+	<td>구분</td>
+	<td>{{board.gubun}}</td>
+</tr>
+<tr>
+	<td>등록일자</td>
+	<td>{{board.reg_date}}</td>
+</tr>
+<tr>
+	<td colspan="2">공지내용</td>
+</tr>
+<tr>
+	<td colspan="2"><textarea rows="10" readonly name="content">{{board.content}}</textarea></td>
+</tr>
+</table>
+<br>
+<div align="middle">
+	<input type="button" class="btn btn-secondary btn-sm" value="돌아가기" onclick="javascript:history.back();">
+	<input type="button" id="btnDelete" class="btn btn-secondary btn-sm" value="삭제" 
+		style="display:none;" onclick="delete_board()">
+</div>
+<input type="hidden" name="board_id" value={{board.id}}>
+</form>
+</main>
+{% endblock %}
