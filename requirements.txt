@@ -34,6 +34,7 @@ openpyxl==2.5.14
 pandas==0.24.1
 pandocfilters==1.4.2
 parso==0.3.4
+passlib==1.7.1
 pickleshare==0.7.5
 prometheus-client==0.6.0
 prompt-toolkit==2.0.9
