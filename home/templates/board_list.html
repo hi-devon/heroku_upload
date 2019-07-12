@@ -22,6 +22,13 @@ td {
 .ui-dialog-titlebar-close{
     display: none;
 }
+.ui-widget-header {
+	border: 1px solid silver;
+	background: gray url("images/ui-bg_glass_25_cb842e_1x400.png") 50% 50% repeat-x;
+}
+#pass-dialog input {
+	width: 100%;
+}
 </style>
 <script>
 $(document).ready(function() {
@@ -64,6 +71,7 @@ function PasswordCheck() {
 	});
 	$("#pass-dialog").dialog("close");
 }
+
 </script>
 <main role="main" class="inner cover">
 <h3 align="center">[공지 및 공고사항]</h3>
