@@ -47,7 +47,11 @@ def contact(request):
 def board_detail(request):
     if request.method == "POST":
         brd = Board.objects.get(pk=request.POST.get("board_id"))
-        brd.delete()
+        if request.POST.get('save_kind') == 'delete':
+            brd.delete()
+        elif request.POST.get('save_kind') == 'modify':
+            brd.content = nullcheck(request.POST.get('content'))
+            brd.save()
     else:
         brd = Board.objects.get(pk=request.GET.get('id'))
     return render(request, 'board_detail.html', {"board": brd})

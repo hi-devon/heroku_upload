@@ -22,6 +22,8 @@ $(document).ready(function() {
 		'success': function(data) {
 			if (data.is_authenticated) {
 				$("#btnDelete").show();
+				$("#btnSave").show();
+				$("#txtaraContent").removeAttr("readonly");
 			} else {
 				$("#btnDelete").hide();
 			}
@@ -29,10 +31,22 @@ $(document).ready(function() {
 	});
 });
 function delete_board() {
+	$("input[name=saveKind]").val("delete");
+	update_board();
+}
+function modify_board() {
+	$("input[name=saveKind]").val("modify");
+	update_board();
+}
+function update_board() {
 	$.ajax({
 		url: 'board-detail',
 		type: 'POST',
-		data: {'board_id': $("input[name=board_id]").val() },
+		data: {
+			'board_id': $("input[name=board_id]").val(),
+			'content': $("#txtaraContent").val(),
+			'save_kind': $("input[name=saveKind]").val()
+		},
 		success: function(data) {
 			page_back_reload();
 		}
@@ -61,16 +75,19 @@ function delete_board() {
 	<td colspan="2">공지내용</td>
 </tr>
 <tr>
-	<td colspan="2"><textarea rows="10" readonly name="content">{{board.content}}</textarea></td>
+	<td colspan="2"><textarea id="txtaraContent" rows="10" readonly name="content">{{board.content}}</textarea></td>
 </tr>
 </table>
 <br>
 <div align="middle">
 	<input type="button" class="btn btn-secondary btn-sm" value="돌아가기" onclick="javascript:history.back();">
+	<input type="button" id="btnSave" class="btn btn-secondary btn-sm" value="저장" 
+		style="display:none;" onclick="modify_board()">
 	<input type="button" id="btnDelete" class="btn btn-secondary btn-sm" value="삭제" 
 		style="display:none;" onclick="delete_board()">
 </div>
 <input type="hidden" name="board_id" value={{board.id}}>
+<input type="hidden" name="saveKind" value="delete">
 </form>
 </main>
 {% endblock %}
